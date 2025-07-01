@@ -97,21 +97,3 @@ graficos_paths.append(guardar_grafico(fig5, "crecimiento.png"))
 st.subheader("📋 Datos filtrados")
 st.dataframe(df_filtrado)
 
-# Generar PDF
-def generar_pdf(paths):
-    pdf = FPDF()
-    for path in paths:
-        pdf.add_page()
-        pdf.image(path, x=10, y=20, w=190)
-    temp_pdf_path = os.path.join(tempfile.gettempdir(), "dashboard_metricas.pdf")
-    pdf.output(temp_pdf_path)
-    return temp_pdf_path
-
-# Botón de descarga
-if st.button("📄 Exportar todos los gráficos a PDF"):
-    try:
-        pdf_path = generar_pdf(graficos_paths)
-        with open(pdf_path, "rb") as f:
-            st.download_button("⬇️ Descargar PDF", f, file_name="dashboard_metricas.pdf", mime="application/pdf")
-    except Exception as e:
-        st.error(f"Ocurrió un error al generar el PDF: {e}")
