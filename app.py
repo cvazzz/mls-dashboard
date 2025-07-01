@@ -63,19 +63,19 @@ graficos_paths = []
 st.subheader("📈 Seguidores por Plataforma")
 fig1 = px.line(df_filtrado, x="Fecha", y="Seguidores", color="Plataforma", markers=True)
 st.plotly_chart(fig1, use_container_width=True)
-graficos_paths.append(guardar_grafico(fig1, "seguidores.png"))
+
 
 # Gráfico 2
 st.subheader("❤️ Engagement Rate por Plataforma")
 fig2 = px.line(df_filtrado, x="Fecha", y="Engagement Rate", color="Plataforma", markers=True)
 st.plotly_chart(fig2, use_container_width=True)
-graficos_paths.append(guardar_grafico(fig2, "engagement.png"))
+
 
 # Gráfico 3
 st.subheader("🔁 Interacciones por 1000 Seguidores")
 fig3 = px.bar(df_filtrado, x="Fecha", y="Interacciones por 1000 seguidores", color="Plataforma", barmode="group")
 st.plotly_chart(fig3, use_container_width=True)
-graficos_paths.append(guardar_grafico(fig3, "interacciones.png"))
+
 
 # Gráfico 4
 st.subheader("🗓️ Publicaciones por Mes")
@@ -83,7 +83,7 @@ df_filtrado['Mes'] = df_filtrado['Fecha'].dt.to_period('M').astype(str)
 posts_mensuales = df_filtrado.groupby(['Mes', 'Plataforma'])['Cantidad de Posts'].sum().reset_index()
 fig4 = px.bar(posts_mensuales, x="Mes", y="Cantidad de Posts", color="Plataforma", barmode="group")
 st.plotly_chart(fig4, use_container_width=True)
-graficos_paths.append(guardar_grafico(fig4, "posts.png"))
+
 
 # Gráfico 5
 st.subheader("📊 Crecimiento de Seguidores (%)")
@@ -91,7 +91,7 @@ df['Crecimiento de Seguidores (%)'] = pd.to_numeric(df['Crecimiento de Seguidore
 crecimiento_data = df_filtrado.dropna(subset=['Crecimiento de Seguidores (%)'])
 fig5 = px.line(crecimiento_data, x="Fecha", y="Crecimiento de Seguidores (%)", color="Plataforma", markers=True)
 st.plotly_chart(fig5, use_container_width=True)
-graficos_paths.append(guardar_grafico(fig5, "crecimiento.png"))
+
 
 # Tabla
 st.subheader("📋 Datos filtrados")
